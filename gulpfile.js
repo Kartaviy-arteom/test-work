@@ -80,6 +80,7 @@ gulp.task("sprite", function() {
 gulp.task("scripts:vendor", function() {
   return gulp
     .src("source/js/vendor/**/*.js")
+    .pipe(sourcemap.init())
     .pipe(plumber())
     .pipe(concat("vendor.js"))
     .pipe(uglify())
@@ -89,12 +90,14 @@ gulp.task("scripts:vendor", function() {
         suffix: ".min"
       })
     )
+    .pipe(sourcemap.write("."))
     .pipe(gulp.dest("build/js"));
 });
 
 gulp.task("scripts", function() {
   return gulp
     .src("source/js/modules/**/*.js")
+    .pipe(sourcemap.init())
     .pipe(plumber())
     .pipe(concat("main.js"))
     .pipe(gulp.dest("build/js"))
@@ -103,6 +106,7 @@ gulp.task("scripts", function() {
         suffix: ".min"
       })
     )
+    .pipe(sourcemap.write("."))
     .pipe(gulp.dest("build/js"));
 });
 
